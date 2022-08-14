@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <h1 class="text-center">My awesome shopping list</h1>
+    {% if shopping_items.count > 0 %}
+        <table class="table table-striped text-center">
+            <thead>
+            <th width="10%">Position</th>
+            <th width="60%">Item</th>
+            <th width="10%">Quantity</th>
+            <th class="text-right" width="20%"></th>
+            </thead>
+            <tbody>
+            {% for shopping_item in shopping_items %}
+                {% with counter=forloop.counter %}
+                    <tr>
+                        <td>{{ counter }}</td>
+                        <td>{{ shopping_item.name }}</td>
+                        <td>{{ shopping_item.quantity }}</td>
+                        <td class="text-right">
+                            <a href="{% url 'edit-shopping-item' shopping_item.pk %}"
+                               class="btn btn-sm btn-info">Edit</a>
+                        </td>
+                        <td class="text-right">
+                            <a href="{% url 'delete-shopping-item' shopping_item.pk %}" class="btn btn-sm btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                {% endwith %}
+            {% endfor %}
+
+            </tbody>
+        </table>
+    {% else %}
+        <p class="text-center">
+            It looks like there are no shopping items in your list yet, please add some below !!
+        </p>
+    {% endif %}
+
+    <div class="input-group mb-3">
+        <a class="btn btn-primary btn-block" href="{% url 'create-shopping-item' %}" type="button">Add new item</a>
+    </div>
+{% endblock %}
