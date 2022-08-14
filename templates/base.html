@@ -8,32 +8,6 @@
         <div class="col-md-8">
             {% block body %}
             {% endblock %}
-
-            <p><strong id="task1">Task 1: Wire up the "Add new item" button above.</strong> <br/>
-                When clicked add a shopping item to the list. There is a table in the database named
-                "shopping_list_items" containing the columns
-            <ul>
-                <li>id: an integer auto-incremented</li>
-                <li>name: varchar(255) not null</li>
-                <li>quantity: unsigned integer</li>
-            </ul>
-            </p>
-
-            <p><strong>Task 2: Sort the items alphabetically</strong><br/>
-                Sort the items in the list alphabetically. Case-insensitive if possible. The number shown in the
-                position column should be the item's placement
-                in the list. Starting at one.
-            </p>
-
-            <p><strong>Task 3: Wire up the delete buttons</strong><br/>
-                When a user clicks the delete button, show a confirmation and if confirmed, delete that item from the
-                database.
-            </p>
-
-            <p><strong>Task 4: Make the quantity column editable</strong><br/>
-                Instead of just a number, make the quantity cells editable by adding an input.<br/>
-                For each row, add a save button that will update the quantity for that row.
-            </p>
         </div>
     </div>
 </div>
