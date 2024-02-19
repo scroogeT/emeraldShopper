@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 
 {% block body %}
-    <h1 class="text-center">My awesome shopping list</h1>
+    <h1 class="text-center my-3">My awesome shopping list</h1>
     {% if shopping_items.count > 0 %}
         <table class="table table-striped text-center">
-            <thead>
-            <th width="10%">Position</th>
-            <th width="60%">Item</th>
-            <th width="10%">Quantity</th>
-            <th class="text-right" width="20%"></th>
+            <thead class="text-center">
+            <th width="5%">Position</th>
+            <th width="20%">Item</th>
+            <th width="50%">Description</th>
+            <th class="text-right" width="25%"></th>
             </thead>
             <tbody>
             {% for shopping_item in shopping_items %}
@@ -16,13 +16,21 @@
                     <tr>
                         <td>{{ counter }}</td>
                         <td>{{ shopping_item.name }}</td>
-                        <td>{{ shopping_item.quantity }}</td>
-                        <td class="text-right">
-                            <a href="{% url 'edit-shopping-item' shopping_item.pk %}"
-                               class="btn btn-sm btn-info">Edit</a>
-                        </td>
-                        <td class="text-right">
-                            <a href="{% url 'delete-shopping-item' shopping_item.pk %}" class="btn btn-sm btn-danger">Delete</a>
+                        <td class="text-center">{{ shopping_item.description }}</td>
+                        <td>
+                            <a href="{% url 'todo:delete-shopping-item' shopping_item.pk %}" class="btn btn-danger">
+                                <i class="bi bi-trash"></i>
+                            </a>
+
+                            <a href="{% url 'todo:edit-shopping-item' shopping_item.pk %}"
+                               class="btn btn-info">
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
+
+{#                            <a href="{% url 'todo:edit-shopping-item' shopping_item.pk %}"#}
+{#                               class="btn btn-success">#}
+{#                                <i class="bi bi-clipboard-check"></i>#}
+{#                            </a>#}
                         </td>
                     </tr>
                 {% endwith %}
@@ -37,6 +45,30 @@
     {% endif %}
 
     <div class="input-group mb-3">
-        <a class="btn btn-primary btn-block" href="{% url 'create-shopping-item' %}" type="button">Add new item</a>
+        <a class="btn btn-primary btn-block" href="{% url 'todo:create-shopping-item' %}" type="button">Add new item</a>
     </div>
+
+    {% if completed_items.count > 0 %}
+
+        <hr class="m-5">
+
+        <div class="list-group">
+            <h2 class="text-center mb-3">Completed items</h2>
+            {% for completed_item in completed_items %}
+                <a href="{% url 'todo:edit-shopping-item' completed_item.id %}"
+                   class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">
+                            {{ completed_item.name }}
+                        </h5>
+                        <small>{{ completed_item.updated_on | date }}</small>
+                    </div>
+                    <p class="mb-1">
+                        {{ completed_item.description }}
+                    </p>
+                </a>
+            {% endfor %}
+
+        </div>
+    {% endif %}
 {% endblock %}

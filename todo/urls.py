@@ -1,6 +1,8 @@
 from django.urls import path
 from todo import views
 
+app_name = 'todo'
+
 urlpatterns = [
     path('', views.ShoppingItems.as_view(), name='shopping-items'),
     path('create/', views.CreateShoppingItem.as_view(), name='create-shopping-item'),
