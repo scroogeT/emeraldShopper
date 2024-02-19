@@ -12,6 +12,8 @@ The instructions below assumes you're already familiar with Python/Django
         ``python manage.py makemigrations`` and
         ``python manage.py migrate``
 6. run ``python manage.py runserver`` to run the project & open in the browser
-7. run ``python manage.py test`` to run the tests
+7. run ``python manage.py test`` to run the tests (There are only a few tests, but more can be added as needed)
+
+NB: Algorithm in question 2 is also included in the `todo` tests to ensure it works as expected
 
 Have fun creating, editing and deleting items from the shopping list !!

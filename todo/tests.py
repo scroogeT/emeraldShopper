@@ -2,6 +2,7 @@ from django.urls import reverse
 from django.db import IntegrityError
 from django.test import TestCase, Client
 from todo.models import ShoppingItem
+from algorand import voting_algorithm
 
 
 class ShoppingItemModelTest(TestCase):
@@ -69,3 +70,12 @@ class TestUserView(TestCase):
         self.delete_shopping_item = reverse('todo:delete-shopping-item', args=[shopping_item.id])
         response = self.client.get(self.delete_shopping_item)
         self.assertEqual(response.status_code, 200)
+
+
+class VotingAlgorithmTest(TestCase):
+    def test_voting_algorithm(self):
+        arr = [3, 3, 4, 2, 4, 4, 2, 4, 4]
+        self.assertEqual(voting_algorithm.find_majority_element(arr), 4)
+
+        arr = [3, 3, 4, 2, 4, 4, 2, 4]
+        self.assertEqual(voting_algorithm.find_majority_element(arr), "No majority element")
